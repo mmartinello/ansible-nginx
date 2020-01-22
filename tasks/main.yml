@@ -1,0 +1,7 @@
+---
+- include_tasks: install.yml
+
+- include_tasks: ssl.yml
+  when: nginx_enable_ssl
+
+- include_tasks: configure.yml

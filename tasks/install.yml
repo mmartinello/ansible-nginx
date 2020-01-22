@@ -1,0 +1,4 @@
+---
+- name: Install and configure Nginx
+  include_role:
+    name: nginxinc.nginx

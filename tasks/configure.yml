@@ -1,0 +1,13 @@
+---
+- name: Configure Nginx running user
+  lineinfile:
+    dest: /etc/nginx/nginx.conf
+    regexp: '^user '
+    line: user {{ nginx_user }};
+  notify: Restart Nginx
+
+- name: Configure main server
+  template:
+    src: default.conf.j2
+    dest: "{{ nginx_default_server_conf_file }}"
+  notify: Reload Nginx

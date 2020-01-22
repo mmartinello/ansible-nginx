@@ -1,0 +1,38 @@
+server {
+    listen 80 default_server;
+    server_name _;
+
+{% if nginx_force_ssl == True %}
+    return 301 https://$http_host$request_uri;
+{% else %}
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+{% endif %}
+}
+
+{% if nginx_enable_ssl == True %}
+server {
+    listen 443 ssl default_server;
+    server_name _;
+
+    ssl_certificate {{ nginx_default_ssl_cert.crt_path }};
+    ssl_certificate_key {{ nginx_default_ssl_cert.key_path }};
+{% endif %}
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}

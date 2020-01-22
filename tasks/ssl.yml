@@ -1,0 +1,5 @@
+---
+- name: Create a self-signed SSL certificate
+  include_role:
+    name: mmartinello.ssl
+  when: nginx_create_self_signed_certificate

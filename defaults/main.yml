@@ -1,0 +1,10 @@
+---
+nginx_user: www-data
+nginx_enable_ssl: true
+nginx_force_ssl: true
+nginx_create_self_signed_certificate: true
+nginx_default_server_conf_file: /etc/nginx/conf.d/default.conf
+
+nginx_default_ssl_cert:
+  crt_path: /etc/ssl/certs/{{ ansible_fqdn }}.crt
+  key_path: /etc/ssl/private/{{ ansible_fqdn }}.key
